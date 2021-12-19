@@ -15,13 +15,13 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('service_id')->nullable();
-            $table->unsignedBigInteger('freelancer_id')->nullable();
-            $table->unsignedBigInteger('buyer_id')->nullable();
+            $table->foreignId('service_id')->nullable()->index('fk_orders_to_services');
+            $table->foreignId('freelancer_id')->nullable()->index('fk_orders_freelancer_to_users');
+            $table->foreignId('buyer_id')->nullable()->index('fk_orders_buyer_to_users');
             $table->longText('file')->nullable();
             $table->longText('note')->nullable();
             $table->date('expired')->nullable();
-            $table->unsignedBigInteger('order_status_id')->nullable();
+            $table->foreignId('order_status_id')->nullable()->index('fk_orders_to_order_statuses');
             $table->timestamps();
             $table->softDeletes();
         });
