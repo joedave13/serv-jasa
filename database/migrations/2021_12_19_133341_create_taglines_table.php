@@ -15,7 +15,7 @@ class CreateTaglinesTable extends Migration
     {
         Schema::create('taglines', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('service_id')->nullable();
+            $table->foreignId('service_id')->nullable()->index('fk_taglines_to_services');
             $table->string('tagline')->nullable();
             $table->timestamps();
             $table->softDeletes();
