@@ -15,7 +15,7 @@ class CreateUserExperiencesTable extends Migration
     {
         Schema::create('user_experiences', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_detail_id')->nullable();
+            $table->foreignId('user_detail_id')->nullable()->index('fk_user_experiences_to_user_details');
             $table->longText('experience')->nullable();
             $table->timestamps();
             $table->softDeletes();
