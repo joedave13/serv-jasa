@@ -15,7 +15,7 @@ class CreateUserAdvantagesTable extends Migration
     {
         Schema::create('user_advantages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('service_id')->nullable();
+            $table->foreignId('service_id')->nullable()->index('fk_user_advantages_to_services');
             $table->string('advantage')->nullable();
             $table->timestamps();
             $table->softDeletes();
