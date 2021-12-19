@@ -15,7 +15,7 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreignId('user_id')->nullable()->index('fk_services_to_users');
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
             $table->integer('delivery_time')->nullable();
