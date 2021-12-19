@@ -15,7 +15,7 @@ class CreateUserDetailsTable extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreignId('user_id')->nullable()->index('fk_user_details_to_users');
             $table->longText('photo')->nullable();
             $table->string('role')->nullable();
             $table->string('contact_number')->nullable();
