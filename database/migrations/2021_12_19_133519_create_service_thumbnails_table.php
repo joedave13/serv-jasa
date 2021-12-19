@@ -15,7 +15,7 @@ class CreateServiceThumbnailsTable extends Migration
     {
         Schema::create('service_thumbnails', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('service_id')->nullable();
+            $table->foreignId('service_id')->nullable()->index('fk_service_thumbnails_to_services');
             $table->longText('thumbnail')->nullable();
             $table->timestamps();
             $table->softDeletes();
