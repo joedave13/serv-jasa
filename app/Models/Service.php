@@ -27,4 +27,29 @@ class Service extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function user_advantages()
+    {
+        return $this->hasMany(UserAdvantage::class, 'service_id', 'id');
+    }
+
+    public function taglines()
+    {
+        return $this->hasMany(Tagline::class, 'service_id', 'id');
+    }
+
+    public function service_advantages()
+    {
+        return $this->hasMany(ServiceAdvantage::class, 'service_id', 'id');
+    }
+
+    public function service_thumbnails()
+    {
+        return $this->hasMany(ServiceThumbnail::class, 'service_id', 'id');
+    }
 }
