@@ -22,4 +22,9 @@ class UserAdvantage extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id', 'id');
+    }
 }
