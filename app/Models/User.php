@@ -67,4 +67,24 @@ class User extends Authenticatable
         'deleted_at',
         'email_verified_at',
     ];
+
+    public function user_detail()
+    {
+        return $this->hasOne(UserDetail::class, 'user_id', 'id');
+    }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class, 'user_id', 'id');
+    }
+
+    public function order_buyers()
+    {
+        return $this->hasMany(Order::class, 'buyer_id', 'id');
+    }
+
+    public function order_freelancers()
+    {
+        return $this->hasMany(Order::class, 'freelancer_id', 'id');
+    }
 }
