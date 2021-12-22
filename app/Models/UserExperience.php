@@ -22,4 +22,9 @@ class UserExperience extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function user_detail()
+    {
+        return $this->belongsTo(UserDetail::class, 'user_detail_id', 'id');
+    }
 }
