@@ -25,4 +25,14 @@ class UserDetail extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function user_experiences()
+    {
+        return $this->hasMany(UserExperience::class, 'user_detail_id', 'id');
+    }
 }
