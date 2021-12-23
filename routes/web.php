@@ -25,7 +25,7 @@ Route::get('detail/{id}', [LandingController::class, 'detail'])->name('detail.la
 Route::get('detail_booking/{id}', [LandingController::class, 'detail_booking'])->name('detail.booking.landing');
 Route::resource('/', LandingController::class);
 
-Route::group(['prefix' => 'member', 'as' => 'member.', 'middleware' => ['auth:sanctum', 'verified'], function () {
+Route::group(['prefix' => 'member', 'as' => 'member.', 'middleware' => ['auth:sanctum', 'verified']], function () {
     // Dashboard
     Route::resource('dashboard', MemberController::class);
 
@@ -44,4 +44,4 @@ Route::group(['prefix' => 'member', 'as' => 'member.', 'middleware' => ['auth:sa
     // My Profile
     Route::get('delete_photo', [ProfileController::class, 'deletePhoto'])->name('delete.photo.profile');
     Route::resource('profile', ProfileController::class);
-}]);
+});
