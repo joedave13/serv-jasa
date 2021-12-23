@@ -82,4 +82,14 @@ class MyOrderController extends Controller
     {
         //
     }
+
+    public function accepted($id)
+    {
+        # code...
+    }
+
+    public function rejected($id)
+    {
+        # code...
+    }
 }
