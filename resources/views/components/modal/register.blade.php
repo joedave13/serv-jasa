@@ -13,32 +13,41 @@
                     Join Serv and start your real project
                 </p>
             </div>
-            <form action="index.php" method="get">
+            <form action="{{ route('register') }}" method="POST">
                 <!--body-->
                 <div class="relative p-6 flex-auto mx-10">
                     <div class="mb-4">
                         <label class="block text-grey-darker text-sm mb-2" for="username">
                             Full Name
                         </label>
-                        <input
+                        <input name="name"
                             class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs"
-                            id="username" type="text" placeholder="Your name">
+                            id="name-register" type="text" placeholder="Your name" required>
                     </div>
                     <div class="mb-4">
                         <label class="block text-grey-darker text-sm mb-2" for="email">
                             Email
                         </label>
-                        <input
+                        <input name="email"
                             class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs"
-                            id="email" type="email" placeholder="name@domain.com">
+                            id="email-register" type="email" placeholder="name@domain.com" required>
                     </div>
                     <div>
                         <label class="block text-grey-darker text-sm mb-2" for="password">
                             Password
                         </label>
-                        <input
+                        <input name="password"
                             class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs mb-3"
-                            id="password" type="password" placeholder="At least 8 characters">
+                            id="password-register" type="password" placeholder="At least 8 characters" required>
+                    </div>
+                    <div>
+                        <label class="block text-grey-darker text-sm mb-2" for="password_confirmation">
+                            Confirm Password
+                        </label>
+                        <input name="password_confirmation"
+                            class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs mb-3"
+                            id="password-confirmation-register" type="password" placeholder="At least 8 characters"
+                            required>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="inline-block text-xs text-gray-400">
@@ -54,13 +63,12 @@
                 <!--footer-->
                 <div class="px-6 pb-6 rounded-b-xl mx-10">
                     <input type="hidden" name="auth" value="true">
-                    <a href="#"
-                        class="block text-center bg-serv-button text-white text-lg py-3 px-12 my-2 rounded-lg w-full"
-                        onclick="toggleModal('registerSuccessModal');toggleModal('registerModal')">
+                    <button type="submit"
+                        class="block text-center bg-serv-button text-white text-lg py-3 px-12 my-2 rounded-lg w-full">
                         Sign up
-                    </a>
+                    </button>
                     <p href="#" class="text-center py-5">
-                        Already have account? <a href="#" class="text-serv-button"
+                        Already have account? <a href="javascript:void(0)" class="text-serv-button"
                             onclick="toggleModal('loginModal');toggleModal('registerModal') ">Sign in</a>
                     </p>
                 </div>
