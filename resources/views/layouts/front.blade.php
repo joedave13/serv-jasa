@@ -16,7 +16,6 @@
 
 <body class="antialiased">
     <div class="relative">
-        @include('includes.landing.header')
 
         {{-- @include('sweetalert::alert') --}}
 
