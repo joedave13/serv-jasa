@@ -13,7 +13,7 @@
                     Enter your email & password to continue
                 </p>
             </div>
-            <form action="index.php" method="GET">
+            <form action="{{ route('login') }}" method="POST">
                 <!--body-->
                 <div class="relative p-6 flex-auto mx-10">
                     <div class="mb-4">
@@ -22,7 +22,7 @@
                         </label>
                         <input name="email"
                             class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs"
-                            id="username" type="text" placeholder="name@domain.com">
+                            id="email-login" type="text" placeholder="name@domain.com" required>
                     </div>
                     <div>
                         <label class="block text-grey-darker text-sm mb-2" for="password">
@@ -30,7 +30,7 @@
                         </label>
                         <input name="password"
                             class="appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 placeholder-serv-text text-xs mb-3"
-                            id="password" type="password" placeholder="At least 8 characters">
+                            id="password-login" type="password" placeholder="At least 8 characters" required>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="inline-block text-xs text-gray-400">
@@ -52,7 +52,7 @@
                         Log in
                     </button>
                     <p href="#" class="text-center py-5">
-                        Dont have account? <a href="#" class="text-serv-button"
+                        Dont have account? <a href="javascript:void(0)" class="text-serv-button"
                             onclick="toggleModal('loginModal');toggleModal('registerModal') ">Sign up</a>
                     </p>
                 </div>
