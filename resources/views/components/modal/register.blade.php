@@ -14,6 +14,7 @@
                 </p>
             </div>
             <form action="{{ route('register') }}" method="POST">
+                @csrf
                 <!--body-->
                 <div class="relative p-6 flex-auto mx-10">
                     <div class="mb-4">
