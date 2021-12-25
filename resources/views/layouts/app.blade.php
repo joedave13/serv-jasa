@@ -14,7 +14,7 @@
 </head>
 
 <body class="antialiased">
-    <div class="flex h-screen bg-serv-services-bg" :class={ 'overflow-hidden' : isSideMenuOpen }>
+    <div class="flex h-screen bg-serv-services-bg" :class="{ 'overflow-hidden': isSideMenuOpen }">
         @include('components.dashboard.desktop')
 
         <div x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150"
