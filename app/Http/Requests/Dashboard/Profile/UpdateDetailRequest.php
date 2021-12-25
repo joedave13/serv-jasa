@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dashboard\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateDetailRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateDetailRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,10 @@ class UpdateDetailRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'photo' => ['nullable', 'image', 'max:1024'],
+            'role' => ['nullable', 'string', 'max:100'],
+            'contact_number' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'max:15'],
+            'biography' => ['nullable', 'string', 'max:5000']
         ];
     }
 }
