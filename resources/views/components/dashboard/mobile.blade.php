@@ -6,7 +6,7 @@
     @keydown.escape="closeSideMenu" aria-label="aside">
     <div class="py-4 text-gray-500 dark:text-gray-400">
         <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            <img src="/images/logo.svg" alt="" class="ml-6">
+            <img src="{{ asset('assets/images/logo.svg') }}" alt="" class="ml-6">
         </a>
         <div class="flex items-center pt-5 pl-5 mt-10 space-x-2 border-t border-gray-100">
             <!--Author's profile photo-->
