@@ -167,10 +167,10 @@ Add Service
                                 </div>
                             </div>
                             <div class="px-4 py-3 text-right sm:px-6">
-                                <button type="submit"
+                                <a href="{{ route('member.service.index') }}"
                                     class="inline-flex justify-center px-4 py-2 mr-4 text-sm font-medium text-gray-700 bg-white border border-gray-600 rounded-lg shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
                                     Cancel
-                                </button>
+                                </a>
                                 <button type="submit"
                                     class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                     Create Service
