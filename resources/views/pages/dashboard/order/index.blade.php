@@ -81,7 +81,7 @@ My Orders
                                     3 days left
                                 </td>
                                 <td class="px-1 py-5 text-sm">
-                                    <a href="{{ route('member.order.show', 1) }}"
+                                    <a href="{{ route('member.service.show', 1) }}"
                                         class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
                                         Details</a>
                                     <a href="#" class="px-4 py-2 mt-2 text-center text-white rounded-xl bg-serv-email">
