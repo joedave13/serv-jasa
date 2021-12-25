@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dashboard\Service;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -24,7 +25,12 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:5000'],
+            'delivery_time' => ['required', 'integer', 'max:100'],
+            'revision_limit' => ['required', 'integer', 'max:100'],
+            'price' => ['required', 'integer'],
+            'note' => ['nullable', 'string', 'max:5000'],
         ];
     }
 }
