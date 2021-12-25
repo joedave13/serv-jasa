@@ -17,7 +17,7 @@
 <body class="antialiased">
     <div class="relative">
 
-        {{-- @include('sweetalert::alert') --}}
+        @include('sweetalert::alert')
 
         @yield('content')
 
