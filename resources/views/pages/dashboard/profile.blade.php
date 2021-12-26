@@ -47,55 +47,54 @@ Edit Profile
                                         </div>
                                     </div>
                                     <div class="md:col-span-6 lg:col-span-3">
-                                        <label for="service-name"
-                                            class="block mb-3 font-medium text-gray-700 text-md">Full Name</label>
-                                        <input placeholder="Alex Jones" type="text" name="service-name"
-                                            id="service-name" autocomplete="service-name"
+                                        <label for="name" class="block mb-3 font-medium text-gray-700 text-md">Full
+                                            Name</label>
+                                        <input placeholder="Your Name..." type="text" name="name" id="name"
+                                            autocomplete="name" value="{{ $user->name }}"
                                             class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                     </div>
                                     <div class="md:col-span-6 lg:col-span-3">
-                                        <label for="service-name"
+                                        <label for="role"
                                             class="block mb-3 font-medium text-gray-700 text-md">Role</label>
-                                        <input placeholder="Website Developer" type="text" name="service-name"
-                                            id="service-name" autocomplete="service-name"
+                                        <input placeholder="Your role..." type="text" name="role" id="role"
+                                            autocomplete="role" value="{{ $user->user_detail->role }}"
                                             class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                     </div>
                                     <div class="md:col-span-6 lg:col-span-3">
                                         <label for="service-name"
                                             class="block mb-3 font-medium text-gray-700 text-md">Email Address</label>
-                                        <input placeholder="Alex.jones@gmail.com" type="text" name="service-name"
-                                            id="service-name" autocomplete="service-name"
+                                        <input placeholder="Your email..." type="text" name="email" id="email"
+                                            autocomplete="email" value="{{ $user->email }}"
                                             class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                     </div>
                                     <div class="md:col-span-6 lg:col-span-3">
                                         <label for="service-name"
                                             class="block mb-3 font-medium text-gray-700 text-md">Contact Number</label>
-                                        <input placeholder="087721205555" type="number" name="service-name"
-                                            id="service-name" autocomplete="service-name"
+                                        <input placeholder="Your contact number..." type="number" name="contact_number"
+                                            id="contact_number" autocomplete="contact_number"
+                                            value="{{ $user->user_detail->contact_number }}"
                                             class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                     </div>
                                     <div class="col-span-6">
                                         <label for="service-name"
                                             class="block mb-3 font-medium text-gray-700 text-md">Biografi</label>
-                                        <textarea placeholder="Enter your biography here.." type="text"
-                                            name="service-name" id="service-name" autocomplete="service-name"
+                                        <textarea placeholder="Enter your biography here.." name="biography"
+                                            id="biography" autocomplete="biography"
                                             class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                                            rows="4">I am a web developer and web designer. I have an Associate Degree in Software and Web Development, and I have much experience in programming languages, such as HTML5, CSS3, PHP, Javascript and PHP. I can use Bootstrap and WordPress. I will provide fast response and clear communication in several languages.  Feel free to contact me, thank you!
-                                        </textarea>
+                                            rows="4">{{ $user->user_detail->biography }}</textarea>
                                     </div>
                                     <div class="col-span-6">
-                                        <label for="service-name"
-                                            class="block mb-3 font-medium text-gray-700 text-md">My Experience</label>
+                                        <label for="experience" class="block mb-3 font-medium text-gray-700 text-md">My
+                                            Experience</label>
                                         <input placeholder="More than 9 years of experience" type="text"
-                                            name="service-name" id="service-name" autocomplete="service-name"
+                                            name="experience[]" id="experience"
                                             class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         <input
                                             placeholder="Knowledge in the fields of interface design, marketing and etc"
-                                            type="text" name="service-name" id="service-name"
-                                            autocomplete="service-name"
+                                            type="text" name="experience[]" id="experience"
                                             class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                         <input placeholder="Lead Developer at Sony Music for 8 Years" type="text"
-                                            name="service-name" id="service-name" autocomplete="service-name"
+                                            name="experience[]" id="experience"
                                             class="block w-full py-3 mt-1 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
                                     </div>
                                 </div>
