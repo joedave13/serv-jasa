@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\MyOrder\UpdateRequest;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MyOrderController extends Controller
 {
@@ -14,7 +17,11 @@ class MyOrderController extends Controller
      */
     public function index()
     {
-        return view('pages.dashboard.order.index');
+        $orders = Order::where('freelancer_id', Auth::user()->id)
+            ->latest()
+            ->get();
+
+        return view('pages.dashboard.order.index', compact('orders'));
     }
 
     /**
@@ -24,7 +31,7 @@ class MyOrderController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -35,7 +42,7 @@ class MyOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -55,9 +62,9 @@ class MyOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Order $order)
     {
-        return view('pages.dashboard.order.edit');
+        return view('pages.dashboard.order.edit', compact('order'));
     }
 
     /**
@@ -67,9 +74,19 @@ class MyOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, Order $order)
     {
-        //
+        $data = $request->all();
+
+        if ($request->hasFile('file')) {
+            $data['file'] = $request->file('file')->store('assets/order/attachment', 'public');
+        }
+
+        $order->update($data);
+
+        toast()->success('Order submitted successfully!');
+
+        return redirect()->route('member.order.index');
     }
 
     /**
@@ -80,16 +97,28 @@ class MyOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404);
     }
 
-    public function accepted($id)
+    public function accepted(Order $order)
     {
-        # code...
+        $order->update([
+            'order_status_id' => 2
+        ]);
+
+        toast()->success('Order accepted!');
+
+        return redirect()->route('member.order.index');
     }
 
-    public function rejected($id)
+    public function rejected(Order $order)
     {
-        # code...
+        $order->update([
+            'order_status_id' => 3
+        ]);
+
+        toast()->success('Order rejected!');
+
+        return redirect()->route('member.order.index');
     }
 }
