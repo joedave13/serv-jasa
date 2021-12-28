@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Landing;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LandingController extends Controller
 {
@@ -14,7 +17,11 @@ class LandingController extends Controller
      */
     public function index()
     {
-        return view('pages.landing.index');
+        $services = Service::take(5)
+            ->latest()
+            ->get();
+
+        return view('pages.landing.index', compact('services'));
     }
 
     /**
@@ -24,7 +31,7 @@ class LandingController extends Controller
      */
     public function create()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -35,7 +42,7 @@ class LandingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -46,7 +53,7 @@ class LandingController extends Controller
      */
     public function show($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -57,7 +64,7 @@ class LandingController extends Controller
      */
     public function edit($id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -69,7 +76,7 @@ class LandingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -80,26 +87,49 @@ class LandingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return abort(404);
     }
 
     public function explorer()
     {
-        return view('pages.landing.explorer');
+        $services = Service::latest()->get();
+
+        return view('pages.landing.explorer', compact('services'));
     }
 
     public function booking($id)
     {
-        return view('pages.landing.booking');
+        $service = Service::findOrFail($id);
+        $buyer = Auth::user()->id;
+
+        if ($service->user_id == $buyer) {
+            toast()->warning('Sorry, You cannot book your own service!');
+            return back();
+        }
+
+        $order = Order::create([
+            'service_id' => $service->id,
+            'freelancer_id' => $service->user_id,
+            'buyer_id' => $buyer,
+            'expired' => date('y-m-d', strtotime('+3 days')),
+            'order_status_id' => 4
+        ]);
+
+        return redirect()->route('detail.booking.landing', $order->id);
     }
 
     public function detail($id)
     {
-        return view('pages.landing.detail');
+        $service = Service::findOrFail($id);
+
+        return view('pages.landing.detail', compact('service'));
     }
 
     public function detail_booking($id)
     {
-        # code...
+        $order = Order::findOrFail($id);
+
+
+        return view('pages.landing.booking', compact('order'));
     }
 }
