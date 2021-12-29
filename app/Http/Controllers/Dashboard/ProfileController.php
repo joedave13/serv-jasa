@@ -132,7 +132,7 @@ class ProfileController extends Controller
             }
         }
 
-        toast()->success('Successfully update profile!');
+        toast('Successfully update profile!', 'success');
         return back();
     }
 
@@ -164,7 +164,7 @@ class ProfileController extends Controller
             File::delete('storage/app/public/' . $user_photo);
         }
 
-        toast()->success('Successfully delete profile photo!');
+        toast('Successfully delete profile photo!', 'success');
 
         return back();
     }
