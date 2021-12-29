@@ -22,11 +22,11 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::where('id', Auth::user()->id)->first();
-        $experience = UserExperience::where('user_detail_id', $user->user_detail->id)
+        $experiences = UserExperience::where('user_detail_id', $user->user_detail->id)
             ->orderBy('id', 'asc')
             ->get();
 
-        return view('pages.dashboard.profile', compact('user', 'experience'));
+        return view('pages.dashboard.profile', compact('user', 'experiences'));
     }
 
     /**
@@ -79,14 +79,16 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileRequest $request_profile, UpdateDetailRequest $request_detail, User $user)
+    public function update(UpdateProfileRequest $request_profile, UpdateDetailRequest $request_detail)
     {
         // Get all request
-        $profile_data = $request_profile->all();
-        $detail_data = $request_detail->all();
+        $profile_data = $request_profile->except(['_token', '_method']);
+        $detail_data = $request_detail->except(['_token', '_method']);
+
+        // dd($profile_data);
 
         // Get old profile photo
-        $old_photo = UserDetail::where('id', $user->id)->value('photo');
+        $old_photo = UserDetail::where('id', Auth::user()->id)->value('photo');
 
         // If user upload new photo, delete old photo
         if (isset($detail_data['photo'])) {
@@ -103,10 +105,11 @@ class ProfileController extends Controller
         }
 
         // Update user data
+        $user = User::find(Auth::user()->id);
         $user->update($profile_data);
 
         // Get detail user data, update it
-        $detail_user = UserDetail::find($user->user_detail->id);
+        $detail_user = UserDetail::find(Auth::user()->id);
         $detail_user->update($detail_data);
 
         // Save to experience user
@@ -114,7 +117,7 @@ class ProfileController extends Controller
         if (isset($experience_user_id)) {
             foreach ($profile_data['experience'] as $key => $value) {
                 $experience_user = UserExperience::find($key);
-                $experience_user->user_detail->id = $detail_user->id;
+                $experience_user->user_detail_id = $detail_user->id;
                 $experience_user->experience = $value;
                 $experience_user->save();
             }
@@ -122,7 +125,7 @@ class ProfileController extends Controller
             foreach ($profile_data['experience'] as $key => $value) {
                 if (isset($value)) {
                     $experience_user = new UserExperience();
-                    $experience_user->user_detail->id = $detail_user->id;
+                    $experience_user->user_detail_id = $detail_user->id;
                     $experience_user->experience = $value;
                     $experience_user->save();
                 }
