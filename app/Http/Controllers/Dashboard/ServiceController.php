@@ -79,8 +79,8 @@ class ServiceController extends Controller
         }
 
         // Add to service thumbnails
-        if ($request->hasFile('service-thumbnail')) {
-            foreach ($request->file('service-thumbnail') as $file) {
+        if ($request->hasFile('service_thumbnail')) {
+            foreach ($request->file('service_thumbnail') as $file) {
                 $path = $file->store('assets/service/thumbnail', 'public');
                 ServiceThumbnail::create([
                     'service_id' => $service->id,
@@ -89,7 +89,7 @@ class ServiceController extends Controller
             }
         }
 
-        toast()->success('Service created successfully!');
+        toast('Service created successfully!', 'success');
         return redirect()->route('member.service.index');
     }
 
@@ -140,7 +140,7 @@ class ServiceController extends Controller
         $service->update($data);
 
         // Update service advantage
-        foreach ($data['service_advantage'] as $key => $value) {
+        foreach ($data['service_advantages'] as $key => $value) {
             $service_advantage = ServiceAdvantage::find($key);
             $service_advantage->advantage = $value;
             $service_advantage->save();
@@ -157,7 +157,7 @@ class ServiceController extends Controller
         }
 
         // Update user advantage
-        foreach ($data['user_advantage'] as $key => $value) {
+        foreach ($data['user_advantages'] as $key => $value) {
             $user_advantage = UserAdvantage::find($key);
             $user_advantage->advantage = $value;
             $user_advantage->save();
@@ -174,9 +174,9 @@ class ServiceController extends Controller
         }
 
         // Update tagline
-        foreach ($data['tagline'] as $key => $value) {
+        foreach ($data['taglines'] as $key => $value) {
             $tagline = Tagline::find($key);
-            $tagline->advantage = $value;
+            $tagline->tagline = $value;
             $tagline->save();
         }
 
@@ -191,8 +191,8 @@ class ServiceController extends Controller
         }
 
         // Update thumbnail service
-        if ($request->hasFile('service-thumbnails')) {
-            foreach ($request->file('service-thumbnails') as $key => $value) {
+        if ($request->hasFile('service_thumbnails')) {
+            foreach ($request->file('service_thumbnails') as $key => $value) {
                 // Get old thumbnail
                 $old_thumbnail = ServiceThumbnail::where('id', $key)->first();
 
@@ -216,9 +216,9 @@ class ServiceController extends Controller
         }
 
         // Add new service thumbnail
-        if ($request->hasFile('service-thumbnail')) {
-            foreach ($request->file('service-thumbnail') as $key => $value) {
-                foreach ($request->file('service-thumbnail') as $file) {
+        if ($request->hasFile('service_thumbnail')) {
+            foreach ($request->file('service_thumbnail') as $key => $value) {
+                foreach ($request->file('service_thumbnail') as $file) {
                     $path = $file->store(
                         'assets/service/thumbnail',
                         'public'
@@ -232,7 +232,7 @@ class ServiceController extends Controller
             }
         }
 
-        toast()->success('Service updated successfully!');
+        toast('Service updated successfully!', 'success');
         return redirect()->route('member.service.index');
     }
 
