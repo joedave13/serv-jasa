@@ -129,7 +129,6 @@ class LandingController extends Controller
     {
         $order = Order::findOrFail($id);
 
-
         return view('pages.landing.booking', compact('order'));
     }
 }
