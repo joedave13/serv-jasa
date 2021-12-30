@@ -28,6 +28,11 @@ class Order extends Model
         'deleted_at'
     ];
 
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id', 'id');
+    }
+
     public function buyer()
     {
         return $this->belongsTo(User::class, 'buyer_id', 'id');
