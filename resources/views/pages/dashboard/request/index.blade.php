@@ -43,15 +43,15 @@ My Request
                                     <div class="flex items-center text-sm">
                                         <div class="relative w-10 h-10 mr-3 rounded-full md:block">
                                             <img class="object-cover w-full h-full rounded-full"
-                                                src="{{ $order->user->user_detail->photo != null ? Storage::url($order->user->user_detail->photo) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}"
+                                                src="{{ $order->freelancer->user_detail->photo != null ? Storage::url($order->freelancer->user_detail->photo) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}"
                                                 alt="" loading="lazy" />
                                             <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                             </div>
                                         </div>
                                         <div>
-                                            <p class="font-medium text-black">{{ $order->user->name }}</p>
+                                            <p class="font-medium text-black">{{ $order->freelancer->name }}</p>
                                             <p class="text-sm text-gray-400">
-                                                {{ $order->user->user_detail->role ?? '' }}
+                                                {{ $order->freelancer->user_detail->role ?? '' }}
                                             </p>
                                         </div>
                                     </div>
