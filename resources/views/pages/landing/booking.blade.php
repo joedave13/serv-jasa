@@ -86,7 +86,7 @@ Booking
             To continue payment, please contact directly <br class="lg:block hidden">
             our Freelancer through WhatsApp
         </p>
-        <a href="http://wa.me/628123456789"
+        <a href="http://wa.me/{{ $order->service->user->user_detail->contact_number ?? '#' }}" target="_blank"
             class="bg-serv-button text-white text-md font-medium py-4 w-80 my-2 rounded-2xl text-center inline-block">
             Continue to Chat
         </a>

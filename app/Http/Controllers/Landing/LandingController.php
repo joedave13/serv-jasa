@@ -118,7 +118,7 @@ class LandingController extends Controller
         $buyer = Auth::user()->id;
 
         if ($service->user_id == $buyer) {
-            toast()->warning('Sorry, You cannot book your own service!');
+            toast('Sorry, You cannot book your own service!', 'warning');
             return back();
         }
 
