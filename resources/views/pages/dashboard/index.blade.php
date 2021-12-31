@@ -162,7 +162,7 @@ Dashboard
                                             stroke-linejoin="round" />
                                     </svg>
 
-                                    1 May 2021
+                                    {{ \Carbon\Carbon::parse($order->expired)->format('j M Y') }}
                                 </td>
                             </tr>
                             @empty
