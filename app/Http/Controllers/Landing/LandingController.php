@@ -90,11 +90,11 @@ class LandingController extends Controller
         return abort(404);
     }
 
-    public function explorer()
+    public function explore()
     {
         $services = Service::latest()->get();
 
-        return view('pages.landing.explorer', compact('services'));
+        return view('pages.landing.explore', compact('services'));
     }
 
     public function booking($id)
