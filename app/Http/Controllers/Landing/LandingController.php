@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Landing;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Service;
+use App\Models\ServiceAdvantage;
+use App\Models\ServiceThumbnail;
+use App\Models\Tagline;
+use App\Models\UserAdvantage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -97,6 +101,17 @@ class LandingController extends Controller
         return view('pages.landing.explore', compact('services'));
     }
 
+    public function detail($id)
+    {
+        $service = Service::findOrFail($id);
+        $service_advantages = ServiceAdvantage::where('service_id', $service->id)->get();
+        $user_advantages = UserAdvantage::where('service_id', $service->id)->get();
+        $service_thumbnails = ServiceThumbnail::where('service_id', $service->id)->get();
+        $taglines = Tagline::where('service_id', $service->id)->get();
+
+        return view('pages.landing.detail', compact('service', 'service_advantages', 'user_advantages', 'service_thumbnails', 'taglines'));
+    }
+
     public function booking($id)
     {
         $service = Service::findOrFail($id);
@@ -116,13 +131,6 @@ class LandingController extends Controller
         ]);
 
         return redirect()->route('detail.booking.landing', $order->id);
-    }
-
-    public function detail($id)
-    {
-        $service = Service::findOrFail($id);
-
-        return view('pages.landing.detail', compact('service'));
     }
 
     public function detail_booking($id)
