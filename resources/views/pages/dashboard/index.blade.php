@@ -95,9 +95,17 @@ Dashboard
                                 <td class="w-1/3 px-1 py-5">
                                     <div class="flex items-center text-sm">
                                         <div class="relative w-10 h-10 mr-3 rounded-full md:block">
+                                            @if ($order->buyer->user_detail->photo != null)
                                             <img class="object-cover w-full h-full rounded-full"
-                                                src="{{ $order->buyer->user_detail->photo != null ? Storage::url($order->buyer->user_detail->photo) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}"
-                                                alt="" loading="lazy" />
+                                                src="{{ Storage::url($order->buyer->user_detail->photo) }}" alt="buyer"
+                                                loading="lazy" />
+                                            @else
+                                            <svg class="w-full h-full object-cover object-center rounded-full text-gray-300"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            </svg>
+                                            @endif
                                             <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                             </div>
                                         </div>
