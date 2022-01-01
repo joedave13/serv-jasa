@@ -33,12 +33,12 @@ Route::group(['prefix' => 'member', 'as' => 'member.', 'middleware' => ['auth:sa
     Route::resource('service', ServiceController::class);
 
     // Request
-    Route::post('approve_request/{id}', [RequestController::class, 'approve'])->name('approve.request');
+    Route::post('approve_request/{id}', [RequestController::class, 'approve_request'])->name('approve.request');
     Route::resource('request', RequestController::class);
 
     // My Order
-    Route::get('accept/order/{id}', [MyOrderController::class, 'accepted'])->name('accept.order');
-    Route::get('reject/order/{id}', [MyOrderController::class, 'rejected'])->name('reject.order');
+    Route::get('accept/order/{order}', [MyOrderController::class, 'accepted'])->name('accept.order');
+    Route::get('reject/order/{order}', [MyOrderController::class, 'rejected'])->name('reject.order');
     Route::resource('order', MyOrderController::class);
 
     // My Profile

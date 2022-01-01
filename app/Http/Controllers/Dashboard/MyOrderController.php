@@ -106,7 +106,7 @@ class MyOrderController extends Controller
             'order_status_id' => 2
         ]);
 
-        toast()->success('Order accepted!');
+        toast('Order accepted!', 'success');
 
         return redirect()->route('member.order.index');
     }
@@ -117,7 +117,7 @@ class MyOrderController extends Controller
             'order_status_id' => 3
         ]);
 
-        toast()->success('Order rejected!');
+        toast('Order rejected!', 'success');
 
         return redirect()->route('member.order.index');
     }

@@ -14,7 +14,7 @@ My Orders
                     My Orders
                 </h2>
                 <p class="text-sm text-gray-400">
-                    {{ Auth::user()->order_freelancer->count() }} Total Orders
+                    {{ Auth::user()->order_freelancers->count() }} Total Orders
                 </p>
             </div>
             <div class="col-span-4 lg:text-right">
@@ -41,9 +41,17 @@ My Orders
                                 <td class="px-1 py-5 text-sm w-2/8">
                                     <div class="flex items-center text-sm">
                                         <div class="relative w-10 h-10 mr-3 rounded-full md:block">
+                                            @if ($order->buyer->user_detail->photo != null)
                                             <img class="object-cover w-full h-full rounded-full"
-                                                src="{{ $order->buyer->user_detail->photo != null ? Storage::url($order->buyer->user_detail->photo) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==' }}"
-                                                alt="" loading="lazy" />
+                                                src="{{ Storage::url($order->buyer->user_detail->photo) }}" alt="buyer"
+                                                loading="lazy" />
+                                            @else
+                                            <svg class="w-full h-full object-cover object-center rounded-full text-gray-300"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            </svg>
+                                            @endif
                                             <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true">
                                             </div>
                                         </div>
@@ -82,8 +90,24 @@ My Orders
                                             stroke-linejoin="round" />
                                     </svg>
 
-                                    3 days left
+                                    @if ((\Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($order->expired),
+                                    false)) > 0 )
+                                    {{ \Carbon\Carbon::now()->diffInDays(\Carbon\Carbon::parse($order->expired), false)
+                                    }} days left
+                                    @else
+                                    Expired
+                                    @endif
                                 </td>
+                                @if($order->order_status_id == 1) {{-- Approved --}}
+                                <td class="px-1 py-5 text-sm">
+                                    <a href="{{ route('member.service.show', $order->service->id) }}"
+                                        class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
+                                        Details</a>
+                                    <p class="px-4 py-2 mt-2 inline text-left text-green-500">
+                                        Approved
+                                    </p>
+                                </td>
+                                @elseif ($order->order_status_id == 2) {{-- Progress --}}
                                 <td class="px-1 py-5 text-sm">
                                     <a href="{{ route('member.service.show', $order->service->id) }}"
                                         class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
@@ -93,6 +117,29 @@ My Orders
                                         Submit
                                     </a>
                                 </td>
+                                @elseif($order->order_status_id == 3) {{-- Rejected --}}
+                                <td class="px-1 py-5 text-sm">
+                                    <a href="{{ route('member.service.show', $order->service->id) }}"
+                                        class="px-4 py-2 mt-1 mr-2 text-center text-white rounded-xl bg-serv-email">
+                                        Details</a>
+                                    <p class="px-4 py-2 mt-2 inline text-left text-red-500">
+                                        Rejected
+                                    </p>
+                                </td>
+                                @elseif($order->order_status_id == 4) {{-- Waiting --}}
+                                <td class="px-1 py-5 text-sm">
+                                    <a href="{{ route('member.accept.order', $order->id) }}"
+                                        class="px-4 py-2 mt-2 text-left text-white rounded-xl bg-serv-button">
+                                        Accept
+                                    </a>
+                                    <a href="{{ route('member.reject.order', $order->id) }}"
+                                        class="px-4 py-2 mt-2 text-left bg-white rounded-xl">
+                                        Reject
+                                    </a>
+                                </td>
+                                @else
+                                {{ 'N/A' }}
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>
