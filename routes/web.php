@@ -33,7 +33,7 @@ Route::group(['prefix' => 'member', 'as' => 'member.', 'middleware' => ['auth:sa
     Route::resource('service', ServiceController::class);
 
     // Request
-    Route::get('approve_request/{id}', [RequestController::class, 'approve'])->name('approve.request');
+    Route::post('approve_request/{id}', [RequestController::class, 'approve'])->name('approve.request');
     Route::resource('request', RequestController::class);
 
     // My Order
